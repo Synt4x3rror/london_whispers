@@ -1,6 +1,6 @@
 {
   "name": "london_whispers",
-  "author": "MakeAwesomeHappen",
+  "author": "Synt4x3rror",
   "version": "1.0.0",
   "keywords": ["pebble-app"],
   "private": true,
@@ -12,17 +12,40 @@
     "sdkVersion": "3",
     "enableMultiJS": true,
     "targetPlatforms": [
-      "emery",
       "gabbro"
     ],
     "watchapp": {
       "watchface": true
     },
-    "messageKeys": [
-      "dummy"
-    ],
+    "messageKeys": [],
     "resources": {
-      "media": []
+      "media": [
+        {
+          "type": "raw",
+          "name": "hour_pdc",
+          "file": "hour_hand.pdc"
+        }, {
+          "type": "raw",
+          "name": "minute_pdc",
+          "file": "minute_hand.pdc"
+        }, {
+          "type": "raw",
+          "name": "seconds_pdc",
+          "file": "seconds_hand.pdc"
+        }, {
+          "type": "raw",
+          "name": "date_pdc",
+          "file": "date_hand.pdc"
+        }, {
+          "type": "raw",
+          "name": "hour_marker",
+          "file": "hour_marker.pdc"
+        }, {
+          "type": "raw",
+          "name": "indicator12",
+          "file": "indicator12.pdc"
+        }
+      ]
     }
   }
 }
