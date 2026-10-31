@@ -24,8 +24,17 @@ const primaryColor = colorHelperInstance.getColor('black')
 let marker12 = new Poco.PebbleDrawCommandImage(6)
 let hourMarker = new Poco.PebbleDrawCommandImage(5)
 const hourHand = new Poco.PebbleDrawCommandImage(1)
+const minuteHand = new Poco.PebbleDrawCommandImage(2)
+let secondsHand = new Poco.PebbleDrawCommandImage(3)
 
+// Load required configuration
+const hourHandConfig = config.getHourHandConfiguration()
+
+// Draw basic wathface UI elements
 initialize()
+
+// Watch event for hour change
+// watch.addEventListener('hourchange', handleHourChange)
 
 function initialize() {
 	render.begin();
@@ -45,20 +54,32 @@ function initialize() {
 	)
 
 	// Reference hour indicator - loaded using rotation and config for shits and giggles
-	const hourHandConfig = config.getHourHandConfiguration()
-	const px = hourHand.width / 2
-	const py = hourHand.height / 2
-	render.drawDCI(hourHand.clone().rotate(0, px, py),
-		hourHandConfig[0][0], hourHandConfig[0][1]
+	
+	const px = 0
+	const py = 0
+	render.drawDCI(minuteHand.clone().rotate(0, px, py),
+		hourHandConfig[0].x, hourHandConfig[0].y
 	)
 
+	// The circus begins
+	// const angle = -(11) * Math.PI / 6
+	// render.drawDCI(hourHand.clone().rotate(angle, px, py),
+	// 	74, 56
+	// )
 
 	srh = null
 	marker12 = null
 	render.end();
 }
 
-function handleSecondChange() {
-	return
-	
+function handleHourChange(event) {
+	const referenceHours = event.date.getHours()
+	const handHours = referenceHours >= 12 ? referenceHours -12 : referenceHours
+
+	render.begin()
+	render.drawDCI(hourHand.clone().rotate(-(handHours) * Math.PI / 6, 0, 0),
+		hourHandConfig[handHours].x, hourHandConfig[handHours].y
+	)
+
+	render.end()
 }
