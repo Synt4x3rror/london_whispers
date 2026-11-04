@@ -5,12 +5,6 @@
  */
 
 export default class Config{
-    constructor (renderWidth, renderHeight) {
-        this.renderWidth = renderWidth
-        this.renderHeight = renderHeight
-    }
-
-
     getHourHandConfiguration() {
         // List of x, y coordinates a PDC
         // Used to represent an hour hand.
@@ -33,7 +27,68 @@ export default class Config{
     getMinuteHandConfiguration() {
         // List of x, y coordinates a PDC
         // Used to represent a minutes hand.
-        return []
+        return [
+            {x: 118, y: 0}, // Represents the XX:00 position
+            {x: 132, y: 1}, // XX:01
+            {x: 146, y: 1}, // XX:02
+            {x: 159, y: 2}, // XX:03
+            {x: 172, y: 8}, // XX:04
+            {x: 185, y: 12}, // XX:05
+            {x: 197, y: 17}, // XX:06
+            {x: 209, y: 27}, // XX:07
+            {x: 220, y: 35}, // XX:08
+            {x: 229, y: 46}, // XX:09
+            {x: 237, y: 55}, // XX:10
+            {x: 245, y: 67}, // XX:11
+            {x: 251, y: 80}, // XX:12
+            {x: 255, y: 93}, // XX:13
+            {x: 259, y: 106}, // XX:14
+            {x: 261, y: 119}, // XX:15
+            {x: 261, y: 133}, // XX:16
+            {x: 261, y: 148}, // XX:17
+            {x: 259, y: 161}, // XX:18
+            {x: 255, y: 175}, // XX:19
+            {x: 249, y: 187}, // XX:20
+            {x: 243, y: 199}, // XX:21
+            {x: 235, y: 210}, // XX:22
+            {x: 226, y: 220}, // XX:23
+            {x: 216, y: 230}, // XX:24
+            {x: 205, y: 238}, // XX:25
+            {x: 193 ,y: 245}, // XX:26
+            {x: 181, y: 250}, // XX:27
+            {x: 169, y: 256}, // XX:28
+            {x: 155, y: 259}, // XX:29
+            {x: 141, y: 261}, // XX:30
+            {x: 128, y: 261}, // XX:31
+            {x: 115, y: 261}, // XX:32
+            {x: 101, y: 258}, // XX:33
+            {x: 88, y: 254}, // XX:34
+            {x: 75, y: 248}, // XX:35
+            {x: 63, y: 243}, // XX:36
+            {x: 51, y: 235}, // XX:37
+            {x: 40, y: 227}, // XX:38
+            {x: 31, y: 217}, // XX:39
+            {x: 23, y: 206}, // XX:40
+            {x: 16, y: 195}, // XX:41
+            {x: 10, y: 182}, // XX:42
+            {x: 5, y: 169}, // XX:43
+            {x: 1, y: 156}, // XX:44
+            {x: -1, y: 142}, // XX:45
+            {x: -2, y: 129}, // XX:46
+            {x: -1, y: 116}, // XX:47
+            {x: 2, y: 102}, // XX:48
+            {x: 6, y: 89}, // XX:49
+            {x: 11, y: 76}, // XX:50
+            {x: 18, y: 65}, // XX:51
+            {x: 25, y: 52}, // XX:52
+            {x: 34, y: 43}, // XX:53
+            {x: 44, y: 32}, // XX:54
+            {x: 54, y: 24}, // XX:55
+            {x: 66, y: 17}, // XX:56
+            {x: 78, y: 10}, // XX:57
+            {x: 92, y: 6}, // XX:58
+            {x: 105, y: 2} // XX:59
+        ]
     }
     
 }

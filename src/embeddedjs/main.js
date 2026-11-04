@@ -29,6 +29,7 @@ let secondsHand = new Poco.PebbleDrawCommandImage(3)
 
 // Load required configuration
 const hourHandConfig = config.getHourHandConfiguration()
+const minuteHandConfig = config.getMinuteHandConfiguration()
 
 // Draw basic wathface UI elements
 initialize()
@@ -54,21 +55,19 @@ function initialize() {
 	)
 
 	// Reference hour indicator - loaded using rotation and config for shits and giggles
-	
 	const px = 0
 	const py = 0
+
 	render.drawDCI(minuteHand.clone().rotate(0, px, py),
-		hourHandConfig[0].x, hourHandConfig[0].y
+		minuteHandConfig[0].x, minuteHandConfig[0].y
 	)
 
 	// The circus begins
-	// const angle = -(11) * Math.PI / 6
-	// render.drawDCI(hourHand.clone().rotate(angle, px, py),
-	// 	74, 56
-	// )
+	const angle = -(59) * 6 * (Math.PI / 180)
+	render.drawDCI(minuteHand.clone().rotate(angle, px, py),
+		105, 2
+	)
 
-	srh = null
-	marker12 = null
 	render.end();
 }
 
@@ -76,9 +75,25 @@ function handleHourChange(event) {
 	const referenceHours = event.date.getHours()
 	const handHours = referenceHours >= 12 ? referenceHours -12 : referenceHours
 
+	// Rendering hour hand that's reactive to hour change event
 	render.begin()
 	render.drawDCI(hourHand.clone().rotate(-(handHours) * Math.PI / 6, 0, 0),
 		hourHandConfig[handHours].x, hourHandConfig[handHours].y
+	)
+
+	render.end()
+}
+
+function handleMinuteChange(event) {
+	const date = event.date
+	const referenceHours = date.getHours()
+	const minutes = date.getMinutes()
+
+	// Rendering minutes hand that's reactive to minute change event
+	render.begin()
+	const angle = -(minutes) * 6 * (Math.PI / 180)
+	render.drawDCI(minuteHand.clone().rotate(angle, 0, 0),
+		minuteHandConfig[minutes].x, minuteHandConfig[minutes].y
 	)
 
 	render.end()
