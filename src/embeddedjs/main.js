@@ -1,14 +1,14 @@
 import Poco from "commodetto/Poco";
 import { ColorHelper, ShapeRenderHelper } from "./PebbleHelper"
-import ConfigClass from "./config.js"
+import config from "./config.js"
 
 const render = new Poco(screen);
 let colorHelperInstance = new ColorHelper(render)
 let srh = new ShapeRenderHelper(render)
-const config = new ConfigClass()
 
 const blue = colorHelperInstance.getColor('blue')
 const lime = colorHelperInstance.getColor('lime')
+const red = colorHelperInstance.getColor([255,181,138])
 const backgroundColor = colorHelperInstance.getColor('#fff')
 const primaryColor = colorHelperInstance.getColor('black')
 /**
@@ -27,46 +27,56 @@ const hourHand = new Poco.PebbleDrawCommandImage(1)
 const minuteHand = new Poco.PebbleDrawCommandImage(2)
 let secondsHand = new Poco.PebbleDrawCommandImage(3)
 
-// Load required configuration
-const hourHandConfig = config.getHourHandConfiguration()
-const minuteHandConfig = config.getMinuteHandConfiguration()
-
 // Draw basic wathface UI elements
-initialize()
+// initialize()
 
 // Watch event for hour change
-// watch.addEventListener('hourchange', handleHourChange)
+// watch.addEventListener('secondchange', handleMinuteChange)
+
+initialize()
 
 function initialize() {
 	render.begin();
-	render.fillRectangle(backgroundColor, 0, 0, render.width, render.height);
+	render.fillRectangle(backgroundColor, 0, 0, render.width, render.height)
+	
+	// Initialize circle for hour hands reference
+	render.drawCircle(red, 
+		render.width / 2,
+		render.height / 2,
+		124,
+		0, 360
+	)
 
 	// Initialize some guide lines (horizontal / vertical)
 	render.drawLine(0, render.height/2,render.width, render.height/2,blue, 2)
 	render.drawLine(render.width / 2, 0 , render.width / 2, render.height, lime, 2)
-	
+
 	// Render seconds reference lines
 	srh.drawWatchReferenceLines(122, 'minutes', 5, 3, primaryColor, true)
 
+	
 	// render indicator for 12:00
 	render.drawDCI(marker12, 
 		(render.width - marker12.width) / 2,
 		6
 	)
 
+	// Draw PDC indicators for hours
+	srh.drawHourReferencePDCs(hourMarker, config.hourMarkerConfiguration)
+
 	// Reference hour indicator - loaded using rotation and config for shits and giggles
-	const px = 0
-	const py = 0
+	// const px = 0
+	// const py = 0
 
-	render.drawDCI(minuteHand.clone().rotate(0, px, py),
-		minuteHandConfig[0].x, minuteHandConfig[0].y
-	)
+	// render.drawDCI(hourHand.clone().rotate(0, px, py),
+	// 	config.hourHandConfiguration[0].x, config.hourHandConfiguration[0].y
+	// )
 
-	// The circus begins
-	const angle = -(59) * 6 * (Math.PI / 180)
-	render.drawDCI(minuteHand.clone().rotate(angle, px, py),
-		105, 2
-	)
+	// // The circus begins
+	// const angle = -(59) * 6 * (Math.PI / 180)
+	// render.drawDCI(minuteHand.clone().rotate(angle, px, py),
+	// 	105, 2
+	// )
 
 	render.end();
 }
@@ -78,13 +88,14 @@ function handleHourChange(event) {
 	// Rendering hour hand that's reactive to hour change event
 	render.begin()
 	render.drawDCI(hourHand.clone().rotate(-(handHours) * Math.PI / 6, 0, 0),
-		hourHandConfig[handHours].x, hourHandConfig[handHours].y
+		config.hourHandConfiguration[handHours].x, config.hourHandConfiguration[handHours].y
 	)
 
 	render.end()
 }
 
 function handleMinuteChange(event) {
+	initialize()
 	const date = event.date
 	const referenceHours = date.getHours()
 	const minutes = date.getMinutes()
@@ -93,7 +104,7 @@ function handleMinuteChange(event) {
 	render.begin()
 	const angle = -(minutes) * 6 * (Math.PI / 180)
 	render.drawDCI(minuteHand.clone().rotate(angle, 0, 0),
-		minuteHandConfig[minutes].x, minuteHandConfig[minutes].y
+		config.minuteHandConfiguration[minutes].x, config.minuteHandConfiguration[minutes].y
 	)
 
 	render.end()

@@ -135,4 +135,19 @@ export class ShapeRenderHelper {
             this.render.drawLine(x1, y1, x2, y2, color, lineWidth)
         }
     }
+
+    /**
+     * Helper function used to draw hour reference indicators on the watch face. Since rotating PDCs in poco is a real nightmare, I won't event TRY to make this function reusable in the future. Assumes rotation of PDC file is at (0,0) pivot.
+     * @param {Object} pdc Instance of PDC drawing to be rendered 
+     * @param {Object} hourMarkerConfiguration Configuration containing coordinates where to place each marker according to the corresponding hour mark.  
+     */
+    drawHourReferencePDCs (pdc, hourMarkerConfiguration) {
+        for(var i = 1; i <= 11; i++) {
+            let markerAngle = -(i) * Math.PI / 6
+            this.render.drawDCI(pdc.clone().rotate(markerAngle, 0, 0),
+                hourMarkerConfiguration[i-1].x,
+                hourMarkerConfiguration[i-1].y
+            )
+        }
+    }
 }
