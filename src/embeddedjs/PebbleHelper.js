@@ -150,4 +150,33 @@ export class ShapeRenderHelper {
             )
         }
     }
+
+    /**
+     * 
+     * @param {*} centerX 
+     * @param {*} centerY 
+     * @param {*} radius 
+     * @param {*} thickness 
+     * @param {*} lineColor 
+     * @param {*} backgroundColor 
+     */
+    drawCircleOutline(centerX, centerY, radius, thickness, lineColor, backgroundColor) {
+        if(thickness >= radius || thickness <= 0) {
+            throw new Error('Invalid Parameters - drawCircleOutline()')
+        }
+
+        this.render.drawCircle(lineColor, 
+            centerX,
+            centerY,
+            radius,
+            0, 360
+        )
+
+        this.render.drawCircle(backgroundColor, 
+            centerX,
+            centerY,
+            radius - thickness,
+            0, 360
+        )
+    }
 }
