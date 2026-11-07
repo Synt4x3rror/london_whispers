@@ -25,15 +25,13 @@ let marker12 = new Poco.PebbleDrawCommandImage(6)
 let hourMarker = new Poco.PebbleDrawCommandImage(5)
 const hourHand = new Poco.PebbleDrawCommandImage(1)
 const minuteHand = new Poco.PebbleDrawCommandImage(2)
-let secondsHand = new Poco.PebbleDrawCommandImage(3)
+const secondsHand = new Poco.PebbleDrawCommandImage(3)
 
 // Draw basic wathface UI elements
 // initialize()
 
 // Watch event for hour change
-// watch.addEventListener('secondchange', handleMinuteChange)
-
-initialize()
+watch.addEventListener('secondchange', drawOnSecondChange)
 
 function initialize() {
 	render.begin();
@@ -67,34 +65,40 @@ function initialize() {
 	// Reference hour indicator - loaded using rotation and config for shits and giggles
 	// const px = 0
 	// const py = 0
+	// const count = 6
+	// const angle = -(count) * 6 * (Math.PI / 180)
 
-	// render.drawDCI(hourHand.clone().rotate(0, px, py),
-	// 	config.hourHandConfiguration[0].x, config.hourHandConfiguration[0].y
-	// )
+	// // render.drawDCI(minuteHand.clone().rotate(angle, px, py),
+	// // 	config.minuteHandConfiguration[count].x, config.minuteHandConfiguration[count].y
+	// // )
 
 	// // The circus begins
-	// const angle = -(59) * 6 * (Math.PI / 180)
-	// render.drawDCI(minuteHand.clone().rotate(angle, px, py),
-	// 	105, 2
+	// render.drawDCI(secondsHand.clone().rotate(angle, px, py),
+	// 	config.secondsHandConfiguration[count].x, config.secondsHandConfiguration[count].y
 	// )
 
 	render.end();
 }
 
-function handleHourChange(event) {
-	const referenceHours = event.date.getHours()
-	const handHours = referenceHours >= 12 ? referenceHours -12 : referenceHours
+function drawOnSecondChange(event) {
+	initialize()
+	const date = event.date
+	const referenceHours = date.getHours()
+	const minutes = date.getMinutes()
+	const seconds = date.getSeconds()
 
-	// Rendering hour hand that's reactive to hour change event
+	// Render seconds hand
 	render.begin()
-	render.drawDCI(hourHand.clone().rotate(-(handHours) * Math.PI / 6, 0, 0),
-		config.hourHandConfiguration[handHours].x, config.hourHandConfiguration[handHours].y
+	const angle = -(seconds) * 6 * (Math.PI / 180)
+	render.drawDCI(secondsHand.clone().rotate(angle, 0, 0),
+		config.secondsHandConfiguration[seconds].x, config.secondsHandConfiguration[seconds].y
 	)
 
 	render.end()
+
 }
 
-function handleMinuteChange(event) {
+function drawOnMinuteChange(event) {
 	initialize()
 	const date = event.date
 	const referenceHours = date.getHours()
