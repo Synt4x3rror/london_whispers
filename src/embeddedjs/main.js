@@ -28,10 +28,10 @@ const minuteHand = new Poco.PebbleDrawCommandImage(2)
 const secondsHand = new Poco.PebbleDrawCommandImage(3)
 
 // Draw basic wathface UI elements
-// initialize()
+initialize()
 
 // Watch event for hour change
-watch.addEventListener('secondchange', drawOnSecondChange)
+// watch.addEventListener('secondchange', drawOnSecondChange)
 
 function initialize() {
 	render.begin();
@@ -41,7 +41,7 @@ function initialize() {
 	render.drawCircle(red, 
 		render.width / 2,
 		render.height / 2,
-		124,
+		110,
 		0, 360
 	)
 
@@ -61,21 +61,6 @@ function initialize() {
 
 	// Draw PDC indicators for hours
 	srh.drawHourReferencePDCs(hourMarker, config.hourMarkerConfiguration)
-
-	// Reference hour indicator - loaded using rotation and config for shits and giggles
-	// const px = 0
-	// const py = 0
-	// const count = 6
-	// const angle = -(count) * 6 * (Math.PI / 180)
-
-	// // render.drawDCI(minuteHand.clone().rotate(angle, px, py),
-	// // 	config.minuteHandConfiguration[count].x, config.minuteHandConfiguration[count].y
-	// // )
-
-	// // The circus begins
-	// render.drawDCI(secondsHand.clone().rotate(angle, px, py),
-	// 	config.secondsHandConfiguration[count].x, config.secondsHandConfiguration[count].y
-	// )
 
 	render.end();
 }

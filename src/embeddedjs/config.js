@@ -6,17 +6,17 @@
 
 export default {
     hourMarkerConfiguration: [
-        {x: 188, y: 19}, // 1 Marker
-        {x: 236, y: 64}, // 2 Marker
-        {x: 254, y: 126}, // 3 Marker
-        {x: 239, y: 188}, // 4 Marker
-        {x: 196, y: 235}, // 5 Marker
-        {x: 134, y: 253}, // 6 Marker
-        {x: 72, y: 239}, // 7 Marker
-        {x: 25, y: 196}, // 8 Marker
-        {x: 5, y: 134}, // 9 Marker
-        {x: 20, y: 70}, // 10 Marker
-        {x: 64, y: 25} // 11 Marker
+        {x: 190, y: 16}, // 1 Marker
+        {x: 239, y: 61}, // 2 Marker
+        {x: 259, y: 126}, // 3 Marker
+        {x: 244, y: 191}, // 4 Marker
+        {x: 199, y: 240}, // 5 Marker
+        {x: 134, y: 259}, // 6 Marker
+        {x: 69, y: 245}, // 7 Marker
+        {x: 20, y: 198}, // 8 Marker
+        {x: 0, y: 134}, // 9 Marker
+        {x: 16, y: 69}, // 10 Marker
+        {x: 62, y: 20} // 11 Marker
     ],
 
     hourHandConfiguration: [
