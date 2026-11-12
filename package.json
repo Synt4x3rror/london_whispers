@@ -34,10 +34,6 @@
           "file": "seconds_hand.pdc"
         }, {
           "type": "raw",
-          "name": "date_pdc",
-          "file": "date_hand.pdc"
-        }, {
-          "type": "raw",
           "name": "hour_marker",
           "file": "hour_marker.pdc"
         }, {

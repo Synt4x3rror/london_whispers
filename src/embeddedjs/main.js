@@ -6,9 +6,9 @@ const render = new Poco(screen)
 let colorHelperInstance = new ColorHelper(render)
 let srh = new ShapeRenderHelper(render)
 
-const blue = colorHelperInstance.getColor('blue')
-const lime = colorHelperInstance.getColor('lime')
-const red = colorHelperInstance.getColor([255,181,138])
+// const blue = colorHelperInstance.getColor('blue')
+// const lime = colorHelperInstance.getColor('lime')
+// const red = colorHelperInstance.getColor([255,181,138])
 const backgroundColor = colorHelperInstance.getColor('#fff')
 const primaryColor = colorHelperInstance.getColor('black')
 /**
@@ -16,29 +16,29 @@ const primaryColor = colorHelperInstance.getColor('black')
  * 		(1) - Hour Hand
  * 		(2) - Minute Hand
  * 		(3) - Second Hand
- * 		(4) - Date Hand
- * 		(5) - Hour Marker
- * 		(6) - 12:00 Indicator
+ * 		(4) - Hour Marker
+ * 		(5) - 12:00 Indicator
  */
 
 /**Global variables for watchface settings - Must be replaced with loading from config */
 localStorage.setItem('RENDER_SECONDS_HAND', 'true')
-localStorage.setItem('IS_12_HOUR_DISPLAY', 'true')
 
-let marker12 = new Poco.PebbleDrawCommandImage(6)
-let hourMarker = new Poco.PebbleDrawCommandImage(5)
+let marker12 = new Poco.PebbleDrawCommandImage(5)
+let hourMarker = new Poco.PebbleDrawCommandImage(4)
 const hourHand = new Poco.PebbleDrawCommandImage(1)
 const minuteHand = new Poco.PebbleDrawCommandImage(2)
 const secondsHand = new Poco.PebbleDrawCommandImage(3)
 
-// Draw basic wathface UI elements
-initialize()
+const font = new render.Font("Gothic-Bold", 14)
 
-// if (JSON.parse(localStorage.getItem('RENDER_SECONDS_HAND'))) {
-// 	watch.addEventListener('secondchange', drawWatchFace)
-// } else {
-// 	watch.addEventListener('minutechange', drawWatchFace)
-// }
+// Draw basic wathface UI elements
+// initialize()
+
+if (JSON.parse(localStorage.getItem('RENDER_SECONDS_HAND'))) {
+	watch.addEventListener('secondchange', drawWatchFace)
+} else {
+	watch.addEventListener('minutechange', drawWatchFace)
+}
 
 function initialize() {
 	render.begin()
@@ -72,19 +72,20 @@ function initialize() {
 
 	// Draw PDC indicators for hours
 	srh.drawHourReferencePDCs(hourMarker, config.hourMarkerConfiguration)
-	render.end()
 
-	// Draw "Circle Outline" for digital display
-	srh.drawCircleOutline(render.width / 2, 186,
-		43, 1, primaryColor, backgroundColor)
+	// // Draw "Circle Outline" for digital display
+	// srh.drawCircleOutline(render.width / 2, 186,
+	// 	43, 1, primaryColor, backgroundColor)
 
 	// Draw "Circle Outline" for day interface
 	srh.drawCircleOutline(render.width /4, render.height / 2,
 		32, 1, primaryColor, backgroundColor)
 
-	// Draw "Circle Outline" for month interface
-	srh.drawCircleOutline(render.width * (3/4), render.height / 2,
-		32, 1, primaryColor, backgroundColor)
+	// // Draw "Circle Outline" for month interface
+	// srh.drawCircleOutline(render.width * (3/4), render.height / 2,
+	// 	32, 1, primaryColor, backgroundColor)
+
+	render.end()
 
 }
 
@@ -97,6 +98,9 @@ function drawWatchFace(event) {
 	const minutes = date.getMinutes()
 	const seconds = date.getSeconds()
 
+	const month = String(date.getMonth()).padStart(2, '0')
+	const day = String(date.getDate()).padStart(2, '0')
+
 	// Render seconds hand (if necessary)
 	if(JSON.parse(localStorage.getItem('RENDER_SECONDS_HAND'))) {
 		drawWatchHand(seconds, 'SECONDS')
@@ -106,6 +110,9 @@ function drawWatchFace(event) {
 	drawWatchHand(minutes, 'MINUTES')
 	// Render hours
 	drawWatchHand(watchHandHours, 'HOURS')
+
+	// Render Current date
+	renderDate(month, day)
 
 }
 
@@ -140,5 +147,11 @@ function drawWatchHand(value, type) {
 	render.drawDCI(pdc.clone().rotate(angle, 0, 0),
 		x, y
 	)
+	render.end()
+}
+
+function renderDate(month, day) {
+	render.begin()
+	render.drawText(`${month}/${day}`, font, primaryColor, 50, 115)
 	render.end()
 }
