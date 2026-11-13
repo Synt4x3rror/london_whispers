@@ -1,6 +1,3 @@
-import parseBMF from "commodetto/parseBMF";
-import parseRLE from "commodetto/parseRLE";
-
 // Define a struct of commonly used colors
 const COLORMAP = new Map([
   ['black', [0, 0, 0]],
@@ -132,8 +129,39 @@ export class ShapeRenderHelper {
             let y2 = this.centerY + Math.sin(angle) * (radius - lineLength)
 
             // Draw the line
+            this.render.begin()
             this.render.drawLine(x1, y1, x2, y2, color, lineWidth)
+            this.render.end()
         }
+    }
+
+    /**
+     * 
+     * @param {Object} centroid Object representing x and y coordinates of centroid used to draw lines from 
+     * @param {number} radius How far from the center should a line start being drawn?
+     * @param {number} lineLength Rendered line length
+     * @param {number} lineWidth Rendered line width
+     * @param {Object} color Object representing color to be used for pebble display
+     * @param {number} percentIndex Index indicating battery percentage. Values should be from 0 to 25
+     */
+    drawBatteryLines(centroid, radius, lineLength, lineWidth, color, percentIndex) {
+        // Draw a line for every 4% battery being reported by percentIndex parameter. 
+        // This function will draw a total of 25 lines to reprtesent current battery state
+
+        for (var i = 0; i < percentIndex; i++) {
+            let angle = -(Math.PI + (i * 7.2 * (Math.PI / 180)))
+
+            let x1 = centroid.x + Math.cos(angle) * radius
+            let y1 = centroid.y + Math.sin(angle) * radius
+
+            let x2 = centroid.x + Math.cos(angle) * (radius - lineLength)
+            let y2 = centroid.y + Math.sin(angle) * (radius - lineLength)
+            
+            this.render.begin()
+            this.render.drawLine(x1, y1, x2, y2, color, lineWidth)
+            this.render.end()
+        }
+
     }
 
     /**
@@ -144,10 +172,12 @@ export class ShapeRenderHelper {
     drawHourReferencePDCs (pdc, hourMarkerConfiguration) {
         for(var i = 1; i <= 11; i++) {
             let markerAngle = -(i) * Math.PI / 6
+            this.render.begin()
             this.render.drawDCI(pdc.clone().rotate(markerAngle, 0, 0),
                 hourMarkerConfiguration[i-1].x,
                 hourMarkerConfiguration[i-1].y
             )
+            this.render.end()
         }
     }
 
@@ -165,6 +195,7 @@ export class ShapeRenderHelper {
             throw new Error('Invalid Parameters - drawCircleOutline()')
         }
 
+        this.render.begin()
         this.render.drawCircle(lineColor, 
             centerX,
             centerY,
@@ -178,5 +209,6 @@ export class ShapeRenderHelper {
             radius - thickness,
             0, 360
         )
+        this.render.end()
     }
 }
