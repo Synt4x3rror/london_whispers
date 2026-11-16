@@ -23,23 +23,23 @@
         {
           "type": "raw",
           "name": "hour_pdc",
-          "file": "hour_hand.pdc"
+          "file": "default/hour_hand.pdc"
         }, {
           "type": "raw",
           "name": "minute_pdc",
-          "file": "minute_hand.pdc"
+          "file": "default/minute_hand.pdc"
         }, {
           "type": "raw",
           "name": "seconds_pdc",
-          "file": "seconds_hand.pdc"
+          "file": "default/seconds_hand.pdc"
         }, {
           "type": "raw",
           "name": "hour_marker",
-          "file": "hour_marker.pdc"
+          "file": "default/hour_marker.pdc"
         }, {
           "type": "raw",
           "name": "indicator12",
-          "file": "indicator12.pdc"
+          "file": "default/indicator12.pdc"
         }
       ]
     }

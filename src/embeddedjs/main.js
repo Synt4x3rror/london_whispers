@@ -1,19 +1,17 @@
 import Poco from "commodetto/Poco"
 import Battery from "embedded:sensor/Battery"
 
-import { ColorHelper, ShapeRenderHelper } from "./PebbleHelper"
+import { ShapeRenderHelper } from "./PebbleHelper"
 import config from "./config.js"
 
 const render = new Poco(screen)
-let colorHelperInstance = new ColorHelper(render)
 let srh = new ShapeRenderHelper(render)
 
 // const blue = colorHelperInstance.getColor('blue')
 // const lime = colorHelperInstance.getColor('lime')
-const red = colorHelperInstance.getColor('red')
-const backgroundColor = colorHelperInstance.getColor('#fff')
-const primaryColor = colorHelperInstance.getColor('black')
-colorHelperInstance = null
+const red = render.makeColor(255,0,0)
+const backgroundColor = render.makeColor(255,255,255)
+const primaryColor = render.makeColor(0,0,0)
 
 /**
  * Index of PDC foiles loaded on package.json:
