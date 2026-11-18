@@ -2,6 +2,23 @@
 
 A Pebble Alloy watchface — Uses PDC files to draw elements on the screen. Watchface rendering is done commpletely using Poco render. Currently watchface is black and white, but in the future I'll modify the PDC files so it can be rendered in other color schemes.
 
+<table>
+    <tr>
+        <td>
+            <img src="./github/screenshots/gabbro_1.0.0_20261117-201307.png"></img>
+        </td>
+        <td>
+            <img src="./github/screenshots/gabbro_1.0.0_20261117-201714.gif"></img>
+        </td>
+        <td>
+            <img src="./github/screenshots/battery_50.jpg"></img>
+        </td>
+        <td>
+            <img src="./github/screenshots/battery_13.png"></img>
+        </td>
+    </tr>
+</table>
+
 ## Customization
 Due to memory constraints, I could not get integration with pebble clay, however you can choose if this wactface should render the seconds hand by modifying the RENDER_SECONDS_HAND variable to true.
 
