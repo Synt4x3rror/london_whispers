@@ -10,8 +10,8 @@ let srh = new ShapeRenderHelper(render)
 // const blue = colorHelperInstance.getColor('blue')
 // const lime = colorHelperInstance.getColor('lime')
 const red = render.makeColor(255,0,0)
-const backgroundColor = render.makeColor(255,255,255)
-const primaryColor = render.makeColor(0,0,0)
+const backgroundColor = render.makeColor(0,0,0)
+const primaryColor = render.makeColor(255,255,255)
 
 /**
  * Index of PDC foiles loaded on package.json:
