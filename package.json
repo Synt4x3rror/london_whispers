@@ -1,13 +1,13 @@
 {
-  "name": "london_whispers",
+  "name": "london_whispers_noseconds",
   "author": "Synt4x3rror",
   "version": "1.0.0",
   "keywords": ["pebble-app"],
   "private": true,
   "dependencies": {},
   "pebble": {
-    "displayName": "london_whispers",
-    "uuid": "c69c555f-9822-46ae-a425-8551c731969b",
+    "displayName": "London Whispers (No Seconds)",
+    "uuid": "2ff4cf85-8042-45f1-8ced-6c4e6d9a1bba",
     "projectType": "moddable",
     "sdkVersion": "3",
     "enableMultiJS": true,
