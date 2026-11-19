@@ -23,7 +23,7 @@ const primaryColor = render.makeColor(255,255,255)
  */
 
 /**Global variables for watchface settings - Must be replaced with loading from config */
-localStorage.setItem('RENDER_SECONDS_HAND', 'true')
+localStorage.setItem('RENDER_SECONDS_HAND', 'false')
 
 let marker12 = new Poco.PebbleDrawCommandImage(5)
 let hourMarker = new Poco.PebbleDrawCommandImage(4)

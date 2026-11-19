@@ -7,7 +7,7 @@
   "dependencies": {},
   "pebble": {
     "displayName": "London Whispers Dark",
-    "uuid": "4427fb47-4833-497c-85d4-d307eb2a1856",
+    "uuid": "ac457fe6-712d-4afb-a497-4b8ce1438d72",
     "projectType": "moddable",
     "sdkVersion": "3",
     "enableMultiJS": true,
